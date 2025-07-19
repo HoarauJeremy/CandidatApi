@@ -3,8 +3,8 @@ package org.example.candidatapi.repository;
 import org.example.candidatapi.entity.OffreEmploie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 
-@RepositoryRestResource
-public interface OffreEmploieRepository extends CrudRepository<OffreEmploie, Long> {
+@Repository
+public interface OffreEmploieRepository extends JpaRepository<OffreEmploie, Long> {
 }
