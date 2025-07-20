@@ -1,6 +1,8 @@
 package org.example.candidatapi.controller;
 
+import org.example.candidatapi.dto.OrganisationDto;
 import org.example.candidatapi.entity.Organisation;
+import org.example.candidatapi.mapper.OrganisationMapper;
 import org.example.candidatapi.service.OrganisationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,23 +10,28 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/organisations")
 class OrganisationController {
 
-    @Autowired
-    private OrganisationService organisationService;
+    private final OrganisationService organisationService;
+    private final OrganisationMapper organisationMapper;
+
+    public OrganisationController(OrganisationService organisationService, OrganisationMapper organisationMapper) {
+        this.organisationService = organisationService;
+        this.organisationMapper = organisationMapper;
+    }
 
     @GetMapping
-    public List<Organisation> getAll() {
-        return organisationService.getAllOrganisations();
+    public List<OrganisationDto> getAll() {
+        return organisationService.getAllOrganisations().stream().map(organisationMapper::toDto).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Organisation> getOrganisationById(@PathVariable Long id) {
-        Optional<Organisation> organisation = organisationService.getOrganisationById(id);
-        return organisation.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<OrganisationDto> getOrganisationById(@PathVariable Long id) {
+        return organisationService.getOrganisationById(id).map(organisation -> ResponseEntity.ok(organisationMapper.toDto(organisation))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping

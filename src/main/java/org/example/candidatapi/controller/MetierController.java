@@ -1,30 +1,45 @@
 package org.example.candidatapi.controller;
 
+import org.example.candidatapi.dto.MetierDto;
 import org.example.candidatapi.entity.Metier;
+import org.example.candidatapi.mapper.MetierMapper;
 import org.example.candidatapi.service.MetierService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/metiers")
 class MetierController {
 
-    @Autowired
-    private MetierService metierService;
+    private final MetierService metierService;
+    private final MetierMapper metierMapper;
 
-    @GetMapping
-    public List<Metier> getMetiers() {
-        return metierService.findAll();
+    public MetierController(MetierService metierService, MetierMapper metierMapper) {
+        this.metierService = metierService;
+        this.metierMapper = metierMapper;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping
+    public List<MetierDto> getMetiers() {
+        return metierService.findAll().stream().map(metierMapper::toDto).collect(Collectors.toList());
+    }
+
+    /*@GetMapping("/{id}")
     public ResponseEntity<Metier> getMetier(@PathVariable Long id) {
         Optional<Metier> metierOptional = metierService.findById(id);
         return metierOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }*/
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MetierDto> getMetierById(@PathVariable Long id) {
+        return metierService.findById(id)
+            .map(metier -> ResponseEntity.ok(metierMapper.toDto(metier)))
+            .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
