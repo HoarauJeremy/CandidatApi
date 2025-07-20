@@ -30,4 +30,8 @@ public class UtilisateurService {
         return utilisateurRepository.findUtilisateurByEmail(email);
     }
 
+    public Utilisateur save(Utilisateur utilisateur) {
+        return utilisateurRepository.save(utilisateur);
+    }
+
 }
