@@ -17,12 +17,32 @@ public class CandidatureDto implements Serializable {
     private final Date dateCandidature;
     private final CandidatureStatut statut;
     private final String messageMotivation;
+
     private final OrganisationDto organisation;
-    private final UtilisateurDto utilisateur;
+
+//    private final UtilisateurDto utilisateur;
+    private final String utilisateurNom;
+    private final String utilisateurPrenom;
+    private final String utilisateurEmail;
+
     private final OffreEmploieDto offreEmploie;
+
     private final List<DocumentDto> documents;
 
-    public CandidatureDto(Long id, Date dateCandidature, CandidatureStatut statut, String messageMotivation, OrganisationDto organisation, UtilisateurDto utilisateur, OffreEmploieDto offreEmploie, List<DocumentDto> documents) {
+    public CandidatureDto(Long id, Date dateCandidature, CandidatureStatut statut, String messageMotivation, OrganisationDto organisation, String utilisateurNom, String utilisateurPrenom, String utilisateurEmail, OffreEmploieDto offreEmploie, List<DocumentDto> documents) {
+        this.id = id;
+        this.dateCandidature = dateCandidature;
+        this.statut = statut;
+        this.messageMotivation = messageMotivation;
+        this.organisation = organisation;
+        this.utilisateurNom = utilisateurNom;
+        this.utilisateurPrenom = utilisateurPrenom;
+        this.utilisateurEmail = utilisateurEmail;
+        this.offreEmploie = offreEmploie;
+        this.documents = documents;
+    }
+
+    /*public CandidatureDto(Long id, Date dateCandidature, CandidatureStatut statut, String messageMotivation, OrganisationDto organisation, UtilisateurDto utilisateur, OffreEmploieDto offreEmploie, List<DocumentDto> documents) {
         this.id = id;
         this.dateCandidature = dateCandidature;
         this.statut = statut;
@@ -31,7 +51,7 @@ public class CandidatureDto implements Serializable {
         this.utilisateur = utilisateur;
         this.offreEmploie = offreEmploie;
         this.documents = documents;
-    }
+    }*/
 
     public Long getId() {
         return id;
@@ -53,8 +73,20 @@ public class CandidatureDto implements Serializable {
         return organisation;
     }
 
-    public UtilisateurDto getUtilisateur() {
+    /*public UtilisateurDto getUtilisateur() {
         return utilisateur;
+    }*/
+
+    public String getUtilisateurNom() {
+        return utilisateurNom;
+    }
+
+    public String getUtilisateurPrenom() {
+        return utilisateurPrenom;
+    }
+
+    public String getUtilisateurEmail() {
+        return utilisateurEmail;
     }
 
     public OffreEmploieDto getOffreEmploie() {
@@ -75,15 +107,23 @@ public class CandidatureDto implements Serializable {
                 Objects.equals(this.statut, entity.statut) &&
                 Objects.equals(this.messageMotivation, entity.messageMotivation) &&
                 Objects.equals(this.organisation, entity.organisation) &&
-                Objects.equals(this.utilisateur, entity.utilisateur) &&
+//                Objects.equals(this.utilisateur, entity.utilisateur) &&
+                Objects.equals(this.utilisateurNom, entity.utilisateurNom) &&
+                Objects.equals(this.utilisateurPrenom, entity.utilisateurPrenom) &&
+                Objects.equals(this.utilisateurEmail, entity.utilisateurEmail) &&
                 Objects.equals(this.offreEmploie, entity.offreEmploie) &&
                 Objects.equals(this.documents, entity.documents);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, dateCandidature, statut, messageMotivation, organisation, utilisateur, offreEmploie, documents);
+        return Objects.hash(id, dateCandidature, statut, messageMotivation, organisation, utilisateurNom, utilisateurPrenom, utilisateurEmail, offreEmploie, documents);
     }
+
+    /*@Override
+    public int hashCode() {
+        return Objects.hash(id, dateCandidature, statut, messageMotivation, organisation, utilisateur, offreEmploie, documents);
+    }*/
 
     @Override
     public String toString() {
@@ -93,7 +133,10 @@ public class CandidatureDto implements Serializable {
                 "statut = " + statut + ", " +
                 "messageMotivation = " + messageMotivation + ", " +
                 "organisation = " + organisation + ", " +
-                "utilisateur = " + utilisateur + ", " +
+//                "utilisateur = " + utilisateur + ", " +
+                "utilisateur Nom = " + utilisateurNom + ", " +
+                "utilisateur Prenom = " + utilisateurPrenom + ", " +
+                "utilisateur Email = " + utilisateurEmail + ", " +
                 "offreEmploie = " + offreEmploie + ", " +
                 "documents = " + documents + ")";
     }
