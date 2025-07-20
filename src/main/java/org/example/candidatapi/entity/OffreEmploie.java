@@ -1,5 +1,6 @@
 package org.example.candidatapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -46,6 +47,7 @@ public class OffreEmploie {
     private Commune commune;
 
     @OneToMany(mappedBy = "offreEmploie")
+//    @JsonIgnore
     private List<Candidature> candidatures;
 
 

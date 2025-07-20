@@ -1,5 +1,6 @@
 package org.example.candidatapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class Organisation {
     private Commune commune;
 
     @OneToMany(mappedBy = "organisation")
+    @JsonIgnore
     private List<OffreEmploie> offreEmploies;
 
     public Long getId() {

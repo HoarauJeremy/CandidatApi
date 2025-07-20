@@ -1,5 +1,6 @@
 package org.example.candidatapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -14,9 +15,12 @@ public class Metier {
 
     private String nom;
 
+    @Column(nullable = true)
     private String description;
 
+    @Column(nullable = true)
     @OneToMany(mappedBy = "metier")
+    @JsonIgnore
     private List<OffreEmploie> offreEmploies;
 
     public Long getId() {

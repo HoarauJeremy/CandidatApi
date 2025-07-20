@@ -1,5 +1,8 @@
 package org.example.candidatapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -13,6 +16,8 @@ public class Candidature {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC+4")
     private Date dateCandidature;
 
     @Enumerated(EnumType.STRING)
@@ -26,18 +31,24 @@ public class Candidature {
 
     @ManyToOne
     @JoinColumn(name = "organisation_id")
+//    @JsonIgnore
     private Organisation organisation;
 
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")
+    @JsonIgnore
     private Utilisateur utilisateur;
 
     @ManyToOne
     @JoinColumn(name = "offreEmploie_id", nullable = true) // pour candidature spontanée
+//    @JsonIgnore
     private OffreEmploie offreEmploie;
 
     @ManyToMany
+//    @JsonIgnore
     private List<Document> documents;
+
+    public Candidature() {}
 
     public Long getId() {
         return id;
