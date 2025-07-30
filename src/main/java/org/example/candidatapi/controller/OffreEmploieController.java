@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,12 +24,12 @@ class OffreEmploieController {
 
     @GetMapping
     public List<OffreEmploieDto> getOffreEmploie() {
-        return offreEmploieService.findAll().stream().map(offreEmploieMapper::toDto).collect(Collectors.toList());
+        return offreEmploieService.findAllOffreEmploie().stream().map(offreEmploieMapper::toDto).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<OffreEmploieDto> getOffreEmploie(@PathVariable Long id) {
-        return offreEmploieService.findById(id)
+        return offreEmploieService.findOffreEmploieById(id)
                 .map(offreEmploie -> ResponseEntity.ok(offreEmploieMapper.toDto(offreEmploie))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -42,12 +41,12 @@ class OffreEmploieController {
 
     @PostMapping
     public OffreEmploie addOffreEmploie(@RequestBody OffreEmploie offreEmploie) {
-        return offreEmploieService.save(offreEmploie);
+        return offreEmploieService.saveOffreEmploie(offreEmploie);
     }
 
     @DeleteMapping
     public ResponseEntity<Object> deleteOffreEmploie(@PathVariable Long id) {
-        offreEmploieService.delete(id);
+        offreEmploieService.deleteOffreEmploie(id);
         return ResponseEntity.noContent().build();
     }
 }

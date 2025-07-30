@@ -3,7 +3,7 @@ package org.example.candidatapi.controller;
 import org.example.candidatapi.dto.CommuneDto;
 import org.example.candidatapi.entity.Commune;
 import org.example.candidatapi.mapper.CommuneMapper;
-import org.example.candidatapi.service.CommunesService;
+import org.example.candidatapi.service.CommuneService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,24 +12,24 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/communes")
-class CommunesController {
+class CommuneController {
 
-    private final CommunesService communesService;
+    private final CommuneService communeService;
     private final CommuneMapper communeMapper;
 
-    public CommunesController(CommunesService communesService, CommuneMapper communeMapper) {
-        this.communesService = communesService;
+    public CommuneController(CommuneService communeService, CommuneMapper communeMapper) {
+        this.communeService = communeService;
         this.communeMapper = communeMapper;
     }
 
     @GetMapping
     public List<CommuneDto> getAllCommunes() {
-        return communesService.getAllCommunes().stream().map(communeMapper::toDto).collect(Collectors.toList());
+        return communeService.findAllCommunes().stream().map(communeMapper::toDto).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<CommuneDto> getCommuneById(@PathVariable Long id) {
-        return communesService.getCommuneById(id)
+        return communeService.findCommuneById(id)
                 .map(commune -> ResponseEntity.ok(communeMapper.toDto(commune))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -41,12 +41,12 @@ class CommunesController {
 
     @PostMapping
     public Commune addCommune(@RequestBody Commune commune) {
-        return communesService.addCommune(commune);
+        return communeService.saveCommune(commune);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCommune(@PathVariable Long id) {
-        communesService.deleteCommune(id);
+        communeService.deleteCommune(id);
         return ResponseEntity.noContent().build();
     }
 

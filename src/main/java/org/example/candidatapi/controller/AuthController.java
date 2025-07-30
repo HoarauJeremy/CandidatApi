@@ -40,7 +40,7 @@ class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Utilisateur utilisateur) {
-        if (utilisateurService.findByEmail(utilisateur.getEmail()) != null) {
+        if (utilisateurService.findUtilisateurByEmail(utilisateur.getEmail()) != null) {
             return ResponseEntity.badRequest().body("Utilisateur already exists");
         }
         utilisateur.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));

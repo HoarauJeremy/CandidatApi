@@ -46,7 +46,7 @@ class DocumentController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteDocument(@PathVariable Long id) {
-        documentService.deleteDocumentById(id);
+        documentService.deleteDocument(id);
         return ResponseEntity.noContent().build();
     }
 }

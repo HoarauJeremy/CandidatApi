@@ -4,12 +4,10 @@ import org.example.candidatapi.dto.MetierDto;
 import org.example.candidatapi.entity.Metier;
 import org.example.candidatapi.mapper.MetierMapper;
 import org.example.candidatapi.service.MetierService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -26,7 +24,7 @@ class MetierController {
 
     @GetMapping
     public List<MetierDto> getMetiers() {
-        return metierService.findAll().stream().map(metierMapper::toDto).collect(Collectors.toList());
+        return metierService.findAllMetier().stream().map(metierMapper::toDto).collect(Collectors.toList());
     }
 
     /*@GetMapping("/{id}")
@@ -37,19 +35,19 @@ class MetierController {
 
     @GetMapping("/{id}")
     public ResponseEntity<MetierDto> getMetierById(@PathVariable Long id) {
-        return metierService.findById(id)
+        return metierService.findMetierById(id)
             .map(metier -> ResponseEntity.ok(metierMapper.toDto(metier)))
             .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public Metier createMetier(@RequestBody Metier metier) {
-        return metierService.save(metier);
+        return metierService.saveMetier(metier);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Metier> deleteMetier(@PathVariable Long id) {
-        metierService.deleteById(id);
+        metierService.deleteMetier(id);
         return ResponseEntity.noContent().build();
     }
 }

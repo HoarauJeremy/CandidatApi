@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,7 +26,7 @@ class CandidatureController {
 
     @GetMapping
     public List<CandidatureDto> getAllCandidatures() {
-        return candidatureService.findAll().stream().map(candidatureMapper::toDto).collect(Collectors.toList());
+        return candidatureService.findAllCandidature().stream().map(candidatureMapper::toDto).collect(Collectors.toList());
     }
 
     /*@GetMapping("/{id}")
@@ -36,19 +37,49 @@ class CandidatureController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CandidatureDto> getCandidatureById(@PathVariable Long id) {
-        return candidatureService.findById(id)
+        return candidatureService.findCandidatureById(id)
                 .map(candidature -> ResponseEntity.ok(candidatureMapper.toDto(candidature)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public Candidature createCandidature(@RequestBody Candidature candidature) {
-        return candidatureService.addCandidature(candidature);
+        return candidatureService.saveCandidature(candidature);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Candidature> updateCandidature(@PathVariable Long id, @RequestBody Candidature candidature) {
+        Optional<Candidature> candidatureOptional = candidatureService.findCandidatureById(id);
+        if (candidatureOptional.isPresent()) {
+            Candidature existingCandidature = candidatureOptional.get();
+            candidature.setMessageMotivation(candidature.getMessageMotivation());
+
+            candidatureService.updateCandidature(existingCandidature);
+            return ResponseEntity.ok(existingCandidature);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    /*@PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        // Exemple logique : vérifier si l'utilisateur existe, puis mettre à jour
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            User existingUser = userOptional.get();
+            existingUser.setName(updatedUser.getName());
+            existingUser.setEmail(updatedUser.getEmail());
+            // sauvegarde
+            userRepository.save(existingUser);
+            return ResponseEntity.ok(existingUser);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }*/
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCandidature(@PathVariable Long id) {
-        candidatureService.delete(id);
+        candidatureService.deleteCandidature(id);
         return ResponseEntity.noContent().build();
     }
 
