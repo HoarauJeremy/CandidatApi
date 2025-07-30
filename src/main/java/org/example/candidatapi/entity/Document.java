@@ -12,13 +12,17 @@ public class Document {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(nullable = false)
     private String nom;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TypeDocument typeDocument;
 
+    @Column(nullable = false)
     private String urlFichier;
 
+    @Column(nullable = false)
     private Date creationDate;
 
     @ManyToOne

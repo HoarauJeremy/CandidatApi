@@ -13,20 +13,26 @@ public class Organisation {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(nullable = false)
     private String nom;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(nullable = false)
     private String secteurActivite;
 
     private String siteWeb;
 
     private String logo;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String telephone;
 
+    @Column(nullable = false)
     private String adresse;
 
     @ManyToOne

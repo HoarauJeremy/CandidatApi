@@ -14,24 +14,29 @@ public class OffreEmploie {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(nullable = false)
     private String titre;
 
     private String description;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type_offre_emploie")
+    @Column(name = "type_offre_emploie", nullable = false)
     private TypeOffreEmploie typeOffreEmploie;
 
+    @Column(nullable = false)
     private String lieu;
 
+    @Column(nullable = false)
     private Date dateDebut;
 
+    @Column(nullable = false)
     private Date dateFin;
 
+    @Column(nullable = false)
     private Date DatePublication;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "offre_emploie_statut")
+    @Column(name = "offre_emploie_statut", nullable = false)
     private OffreEmploieStatut offreEmploieStatut;
 
     @ManyToOne

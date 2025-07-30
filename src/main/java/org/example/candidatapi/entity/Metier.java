@@ -13,9 +13,9 @@ public class Metier {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(nullable = false)
     private String nom;
 
-    @Column(nullable = true)
     private String description;
 
     @Column(nullable = true)
