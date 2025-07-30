@@ -4,6 +4,7 @@ import org.example.candidatapi.filter.JwtFilter;
 import org.example.candidatapi.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -57,7 +58,8 @@ class SecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/auth/*", "/offre-emploies", "/swagger-ui/**", "/api-docs/swagger-config", "/api-docs/**").permitAll()
+                .requestMatchers("/auth/*", "/swagger-ui/**", "/api-docs/swagger-config", "/api-docs/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/communes", "/metiers", "/offre-emploies", "/organisations").permitAll()
                 .anyRequest().authenticated()
             )
             .addFilterBefore(new JwtFilter(userDetailsService, jwtUtils), UsernamePasswordAuthenticationFilter.class);
