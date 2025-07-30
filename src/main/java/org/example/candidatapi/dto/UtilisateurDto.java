@@ -15,17 +15,15 @@ public class UtilisateurDto implements Serializable {
     private final String nom;
     private final String prenom;
     private final String email;
-    private final String motDePasse;
     private final TypeUtilisateur typeUtilisateur;
     private final String telephone;
     private final Date dateNaissance;
 
-    public UtilisateurDto(Long id, String nom, String prenom, String email, String motDePasse, TypeUtilisateur typeUtilisateur, String telephone, Date dateNaissance) {
+    public UtilisateurDto(Long id, String nom, String prenom, String email, TypeUtilisateur typeUtilisateur, String telephone, Date dateNaissance) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        this.motDePasse = motDePasse;
         this.typeUtilisateur = typeUtilisateur;
         this.telephone = telephone;
         this.dateNaissance = dateNaissance;
@@ -45,10 +43,6 @@ public class UtilisateurDto implements Serializable {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getMotDePasse() {
-        return motDePasse;
     }
 
     public TypeUtilisateur getTypeUtilisateur() {
@@ -72,7 +66,6 @@ public class UtilisateurDto implements Serializable {
                 Objects.equals(this.nom, entity.nom) &&
                 Objects.equals(this.prenom, entity.prenom) &&
                 Objects.equals(this.email, entity.email) &&
-                Objects.equals(this.motDePasse, entity.motDePasse) &&
                 Objects.equals(this.typeUtilisateur, entity.typeUtilisateur) &&
                 Objects.equals(this.telephone, entity.telephone) &&
                 Objects.equals(this.dateNaissance, entity.dateNaissance);
@@ -80,7 +73,7 @@ public class UtilisateurDto implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nom, prenom, email, motDePasse, typeUtilisateur, telephone, dateNaissance);
+        return Objects.hash(id, nom, prenom, email, typeUtilisateur, telephone, dateNaissance);
     }
 
     @Override
@@ -90,7 +83,6 @@ public class UtilisateurDto implements Serializable {
                 "nom = " + nom + ", " +
                 "prenom = " + prenom + ", " +
                 "email = " + email + ", " +
-                "motDePasse = " + motDePasse + ", " +
                 "typeUtilisateur = " + typeUtilisateur + ", " +
                 "telephone = " + telephone + ", " +
                 "dateNaissance = " + dateNaissance + ")";
