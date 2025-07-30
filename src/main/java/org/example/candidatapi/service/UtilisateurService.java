@@ -18,15 +18,19 @@ public class UtilisateurService {
         this.utilisateurRepository = utilisateurRepository;
     }
 
+    /**
+     * @deprecated
+     */
+    @Deprecated
     public List<Utilisateur> findAll() {
         return utilisateurRepository.findAll();
     }
 
-    public Optional<Utilisateur> findById(Long id) {
+    public Optional<Utilisateur> findUtilisateurById(Long id) {
         return utilisateurRepository.findById(id);
     }
 
-    public Utilisateur findByEmail(String email) {
+    public Utilisateur findUtilisateurByEmail(String email) {
         return utilisateurRepository.findUtilisateurByEmail(email);
     }
 

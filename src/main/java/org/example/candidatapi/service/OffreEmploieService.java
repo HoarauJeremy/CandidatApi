@@ -18,19 +18,19 @@ public class OffreEmploieService {
         this.offreEmploieRepository = offreEmploieRepository;
     }
 
-    public List<OffreEmploie> findAll() {
+    public List<OffreEmploie> findAllOffreEmploie() {
         return offreEmploieRepository.findAll();
     }
 
-    public Optional<OffreEmploie> findById(Long id) {
+    public Optional<OffreEmploie> findOffreEmploieById(Long id) {
         return offreEmploieRepository.findById(id);
     }
 
-    public OffreEmploie save(OffreEmploie offreEmploie) {
+    public OffreEmploie saveOffreEmploie(OffreEmploie offreEmploie) {
         return offreEmploieRepository.save(offreEmploie);
     }
 
-    public void delete(Long id) {
+    public void deleteOffreEmploie(Long id) {
         if (offreEmploieRepository.existsById(id)) {
             offreEmploieRepository.deleteById(id);
         } else {

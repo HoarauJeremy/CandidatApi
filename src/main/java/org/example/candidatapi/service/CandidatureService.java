@@ -18,23 +18,46 @@ public class CandidatureService {
         this.candidatureRepository = candidatureRepository;
     }
 
-    public List<Candidature> findAll() {
+    /**
+     * @return La liste de toutes les candidatures
+     */
+    public List<Candidature> findAllCandidature() {
         return candidatureRepository.findAll();
     }
 
-    public Optional<Candidature> findById(Long id) {
+
+    /**
+     * @param id Identifiant de la candidature
+     * @return Les informations d'une candidature
+     */
+    public Optional<Candidature> findCandidatureById(Long id) {
         return candidatureRepository.findById(id);
     }
 
-    public Candidature addCandidature(Candidature candidature) {
+    /**
+     * @param candidature Données saisie pour une candidature
+     * @return La candidature
+     */
+    public Candidature saveCandidature(Candidature candidature) {
         return candidatureRepository.save(candidature);
     }
 
-    public void delete(Long id) {
+    /**
+     * @param id Identifiant de la candidature
+     */
+    public void deleteCandidature(Long id) {
         if (candidatureRepository.existsById(id)) {
             candidatureRepository.deleteById(id);
         } else {
             throw new RuntimeException("Candidature not found with id: " + id);
         }
+    }
+
+    /**
+     * @param candidature Données modifier saisies pour une candidature
+     * @return la candidature
+     */
+    public Candidature updateCandidature(Candidature candidature) {
+        return candidatureRepository.save(candidature);
     }
 }

@@ -26,6 +26,16 @@ public class OrganisationService {
         return organisationRepository.findById(id);
     }
 
+    /*
+        public Optional<Organisation> getOrganisationById(Long id) {
+            if (organisationRepository.existsById(id)) {
+                return organisationRepository.findById(id);
+            } else {
+                return Optional.empty();
+            }
+        }
+    */
+
     public Organisation saveOrganisation(Organisation organisation) {
         return organisationRepository.save(organisation);
     }

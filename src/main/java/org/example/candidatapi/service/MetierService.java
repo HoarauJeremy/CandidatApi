@@ -3,7 +3,6 @@ package org.example.candidatapi.service;
 import org.example.candidatapi.entity.Metier;
 import org.example.candidatapi.repository.MetierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,23 +18,23 @@ public class MetierService {
         this.metierRepository = metierRepository;
     }
 
-    public List<Metier> findAll() {
+    public List<Metier> findAllMetier() {
         return metierRepository.findAll();
     }
 
-    public Optional<Metier> findById(Long id) {
+    public Optional<Metier> findMetierById(Long id) {
         return metierRepository.findById(id);
     }
 
-    public Metier save(Metier metier) {
+    public Metier saveMetier(Metier metier) {
         return metierRepository.save(metier);
     }
 
-    public Metier update(Metier metier) {
+    public Metier updateMetier(Metier metier) {
         return metierRepository.save(metier);
     }
 
-    public void deleteById(Long id) {
+    public void deleteMetier(Long id) {
         if (metierRepository.existsById(id)) {
             metierRepository.deleteById(id);
         } else {

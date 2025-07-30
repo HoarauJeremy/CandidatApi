@@ -34,7 +34,7 @@ public class DocumentService {
         return documentRepository.save(document);
     }
 
-    public void deleteDocumentById(Long id) {
+    public void deleteDocument(Long id) {
         if (documentRepository.existsById(id)) {
             documentRepository.deleteById(id);
         } else {
